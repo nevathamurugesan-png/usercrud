@@ -1,10 +1,10 @@
 # User CRUD API
 
-Spring Boot backend project implementing:
+Spring Boot backend project
 
+Features:
 - CRUD APIs
 - Pagination
 - Sorting
 - Exception Handling
 - Flyway Migration
-- MySQL Database
