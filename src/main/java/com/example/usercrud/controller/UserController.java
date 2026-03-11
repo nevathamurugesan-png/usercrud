@@ -1,10 +1,11 @@
 package com.example.usercrud.controller;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 import com.example.usercrud.dto.UserDTO;
 import com.example.usercrud.entity.User;
 import com.example.usercrud.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,40 +17,41 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // CREATE USER
     @PostMapping
-    public User createUser(@RequestBody UserDTO userDTO) {
-        return userService.createUser(userDTO);
+    public User createUser(@RequestBody UserDTO dto) {
+        return userService.createUser(dto);
     }
 
-    // GET ALL USERS
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    // PAGINATION API
-    @GetMapping("/page")
-    public Page<User> getUsersWithPagination(Pageable pageable) {
-        return userService.getUsersWithPagination(pageable);
-    }
-
-    // GET USER BY ID
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    // UPDATE USER
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id,
-                           @RequestBody UserDTO userDTO) {
-        return userService.updateUser(id, userDTO);
+                           @RequestBody UserDTO dto) {
+        return userService.updateUser(id, dto);
     }
 
-    // DELETE USER
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+    }
+
+    @GetMapping("/page")
+    public Page<User> getUsersWithPagination(Pageable pageable) {
+        return userService.getUsersWithPagination(pageable);
+    }
+
+    @GetMapping("/sort")
+    public List<User> getUsersSorted(@RequestParam String field,
+                                     @RequestParam String direction) {
+
+        return userService.getUsersSorted(field, direction);
     }
 }

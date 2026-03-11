@@ -1,13 +1,13 @@
 package com.example.usercrud.entity;
 
 import jakarta.persistence.*;
-        import lombok.Getter;
+import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name="users")
 public class User {
 
     @Id
